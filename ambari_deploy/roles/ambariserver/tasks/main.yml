@@ -1,0 +1,28 @@
+---
+
+#This installs ambari server and configures
+- include_vars: group_vars/main
+
+- name: install ambari server
+  yum: name=ambari-server state=present
+
+- name: creating password file
+  template: src=roles/ambariserver/templates/password.dat.j2 dest=/etc/ambari-server/conf/password.dat
+
+- name: configure database
+  command: /usr/bin/mysql --user={{ ambari_dbuser }} \
+           --password={{ ambari_dbpasswd }} \
+           --host={{ ambari_dbhost }} \
+           -e "SOURCE /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql;" {{ ambari_dbname }}
+#  ignore_errors: True
+
+- name: configure ambari
+  template: src=roles/ambariserver/templates/ambari.properties.j2 dest=/etc/ambari-server/conf/ambari.properties
+  notify:
+  - restart ambari server
+
+- name: configure ambari jdbc driver
+  command: ambari-server setup --jdbc-db={{ ambari_dbtype }} --jdbc-driver={{ ambari_jdbcdriver }}
+
+- name: start ambari server
+  service: name=ambari-server state=started enabled=yes

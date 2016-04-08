@@ -1,0 +1,16 @@
+---
+
+#This installs and configures ambari agent
+
+- include_vars: group_vars/main
+
+- name: install ambari agent
+  yum: name=ambari-agent state=present
+
+- name: configure ambari agent
+  lineinfile: dest=/etc/ambari-agent/conf/ambari-agent.ini regexp='hostname=localhost' line='hostname={{ ambari_host }}'
+  notify:
+  - restart ambari agent
+
+- name: start ambari agent
+  service: name=ambar-agent state=started enabled=yes
