@@ -24,4 +24,4 @@
   hosts: cluster
   remote_user: root
   roles:
-  - ambariagents
+  - ambariagent
