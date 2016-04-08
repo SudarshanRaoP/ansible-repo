@@ -1,0 +1,11 @@
+---
+
+##This task installs Oracle JDK 7.
+- name: check of dependencies
+  yum: name=tar state=present
+
+- name: install java
+  unarchive: src=files/jdk{{ java_version }}.tar.gz dest={{ java_home }} creates={{ java_home }}
+
+- name: set JAVA_HOME 
+  command: export JAVA_HOME={{ java_home }}

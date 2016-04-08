@@ -1,0 +1,20 @@
+---
+
+## This task installs mysql server and configures it for ambari
+
+- name: install mysql server
+  yum: name=mysql-server state=present
+
+- name: start mysql server
+  service: name=mysqld state=started enabled=yes
+
+- name: configure mysql for ambari user on all hosts
+  command: mysql -uroot  
+
+#- name: configure mysql for ambari user on localhost
+- mysql_user: name={{ ambari_dbuser }} password={{ ambari_dbpasswd }} 
+  			host=localhost 
+  			state=present 
+  			priv=*.*:ALL
+  			login_user=root
+  			login_password={{ mysql_rootpw }}

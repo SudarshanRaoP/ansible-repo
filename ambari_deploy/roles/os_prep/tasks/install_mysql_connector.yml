@@ -1,0 +1,6 @@
+---
+
+##This task installs mysql java connector
+
+- name: install mysql-connector-java
+  yum: name=mysql-connector-java state=present

@@ -1,0 +1,27 @@
+---
+
+##This playbook deploys ambari cluster
+
+- name: Prepare OS
+  hosts: all
+  remote_user: root
+  roles:
+  - os_prep
+
+- name: Install mysql
+  hosts: mysqlserver
+  remote_user: root
+  roles:
+  - mysql
+
+- name: Setting up ambari server
+  hosts: ambariserver
+  remote_user: root
+  roles:
+  - ambariserver
+
+- name: Installing ambari-agents
+  hosts: cluster
+  remote_user: root
+  roles:
+  - ambariagents
