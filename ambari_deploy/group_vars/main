@@ -1,17 +1,20 @@
----
+#Java variables
+java_version: 1.7.0_45
+java_dir: /usr/java
+java_home: /usr/java/jdk1.7.0_45
 
-##Variables
+#Mysql variables
 
-mysql_server: {{ mysql_host }}
-mysql_rootpasswd: {{ mysql_rootpw }}
+mysql_rootpw:
 
-#ambari database settings
+#Ambari database variables
 ambari_version: 2.0.0
-ambari_server: {{ ambari_host }}
+ambari_host: host1.example.com
+ambari_dbport: 3306
+ambari_dbtype: mysql
+ambari_jdbc: com.mysql.jdbc.Driver
+ambari_jdbcdriver: /usr/share/java/mysql-connector-java.jar
 ambari_dbname: ambari
 ambari_dbuser: ambari
 ambari_dbpasswd: ambari
-ambari_dbtype: mysql
-ambari_jdbc_driver: /usr/share/java/mysql-connector-java.jar
-ambari_repo: http://public-repo-1.hortonworks.com/ambari/centos{{ ansible_distribution_major_version }}/2.x/updates/{{ ambari_version }}/ambari.repo
-
+ambari_dbhost: host1.example.com 
