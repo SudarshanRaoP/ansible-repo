@@ -30,6 +30,7 @@ Edit `group_vars/zookeeper and group_vars/kafka` for customization.
 #### File name must be in the following format: 
 
 Apache Zookeeper: zookeeper-[version].tar.gz
+
 Apache Kafka: kafka_[scala_version]-[version].tar.gz
 
 `If replaced change the versions in group_vars/[files] also.`
