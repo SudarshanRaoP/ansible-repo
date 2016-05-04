@@ -1,3 +1,29 @@
+## Ambari autodeployment playbook
+
+#### Configure `hosts` file and place in `/etc/ansible/conf`
+```yml
+[all]
+host1.example.com
+host2.example.com
+host3.example.com
+
+[ambariserver]
+host2.example.com
+
+[mysqlserver]
+host2.example.com
+
+[cluster]
+host1.example.com
+host3.example.com
+
+```
+
+
+#### Configure `group_vars/main`
+
+```yml
+---
 #Java variables
 java_version: 1.7.0_45
 java_dir: /usr/java
@@ -18,3 +44,4 @@ ambari_dbname: ambari
 ambari_dbuser: ambari
 ambari_dbpasswd: ambari
 ambari_dbhost: host1.example.com 
+```
