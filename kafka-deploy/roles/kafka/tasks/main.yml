@@ -1,0 +1,32 @@
+---
+
+- include_vars: group_vars/kafka
+
+- name: checking dependencies
+  yum: name=tar state=present
+
+- name: create kafka user
+  user: name={{ kafka_user }} state=present
+
+- name: install kafka
+  unarchive: src=files/kafka_{{ scala_version }}-{{ kafka_version }}.tar.gz
+             dest={{ kafka_dir }}
+             creates={{ kafka_home }}
+             owner={{ kafka_user }}
+             group={{ kafka_user }}
+
+
+- name: configure kafka
+  template: src=roles/kafka/templates/server.properties.j2 dest={{ kafka_home }}/config/server.properties
+            owner={{ kafka_user }}
+            group={{ kafka_user }}
+  notify:
+  - restart kafka server
+
+- name: creating kafka log dir
+  file: path={{ kafka_logdir }} state=directory
+        owner={{ kafka_user }}
+        group={{ kafka_user }}
+
+- name: start kafka server
+  command: sudo -u {{ kafka_user }} {{ kafka_home }}/bin/kafka-server-start.sh -daemon {{ kafka_home }}/config/server.properties
