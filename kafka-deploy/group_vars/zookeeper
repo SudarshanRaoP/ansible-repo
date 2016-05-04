@@ -2,6 +2,8 @@
 
 zookeeper_version: 3.4.8
 zookeeper_user: zookeeper
-zookeeper_dir: /usr/local/zookeeper
-zookeeper_data: /usr/local/zookeeper/data
+zookeeper_logdir: /var/log/zookeeper
+zookeeper_dir: /usr/local
+zookeeper_home: /usr/local/zookeeper-{{ zookeeper_version }}
+zookeeper_data: "{{ zookeeper_home }}/data"
 zookeeper_port: 2181

@@ -7,7 +7,7 @@
   - java
 
 - name: Install zookeeper
-  hosts: zookeeper 
+  hosts: zookeeper
   remote_user: root
   roles:
   - zookeeper

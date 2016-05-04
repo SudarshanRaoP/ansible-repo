@@ -5,13 +5,20 @@
 - name: check dependencies
   yum: name=tar state=present
 
-
-- name: install zookeeper
-  unarchive: src=files/zookeeper-{{ zookeeper_version }}.tar.gz dest={{ zookeeper_dir }} creates={{ zookeeper_dir }}
-
-
 - name: create zookeeper user
   user: name={{ zookeeper_user }} state=present
+
+- name: install zookeeper
+  unarchive: src=files/zookeeper-{{ zookeeper_version }}.tar.gz 
+             dest={{ zookeeper_dir }} 
+             creates={{ zookeeper_home }}
+             owner={{ zookeeper_user }}
+             group={{ zookeeper_user }}
+
+- name: create zookeeper dir
+  file: path={{ zookeeper_data }} state=directory
+        owner={{ zookeeper_user }}
+        group={{ zookeeper_user }}
 
 - name: initialize zookeeper
   template: src=roles/zookeeper/templates/myid.j2 
@@ -21,9 +28,20 @@
             mode=0755
             
 - name: configure zookeeper
-  template: src=roles/zookeeper/templates/zoo.cfg.j2 dest={{ zookeeper_dir }}/conf/zoo.cfg owner=root group=root mode=0755
+  template: src=roles/zookeeper/templates/zoo.cfg.j2 dest={{ zookeeper_home }}/conf/zoo.cfg owner=root group=root mode=0755
   notify:
   - restart zookeeper
 
+- name: create zookeeper log directory
+  file: path={{ zookeeper_logdir }} state=directory
+        owner={{ zookeeper_user }}
+        group={{ zookeeper_user }}
+        mode=0755
+
+- name: configure zookeeper log directory
+  lineinfile: dest={{ zookeeper_home }}/bin/zkEnv.sh 
+              insertbefore="ZOOBINDIR=\"${ZOOBINDIR:-/usr/bin}"
+              line='export ZOO_LOG_DIR={{ zookeeper_logdir }}'
+
 - name: start zookeeper
-  command: sudo -u {{ zookeeper_user }} {{ zookeeper_dir }}/bin/zkServer.sh start
+  command: /usr/bin/sudo -u {{ zookeeper_user }} {{ zookeeper_home }}/bin/zkServer.sh start
