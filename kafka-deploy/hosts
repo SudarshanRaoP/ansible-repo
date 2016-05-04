@@ -1,0 +1,17 @@
+[all]
+zk1.example.com
+zk2.example.com
+zk3.example.com
+kafka1.example.com
+kafka2.example.com
+kafka3.example.com
+
+[zookeeper]
+zk1.example.com zk_myid=1
+zk2.example.com zk_myid=2
+zk3.example.com zk_myid=3
+
+[kafka]
+kafka1.example.com
+kafka2.example.com
+kafka3.example.com

@@ -1,0 +1,15 @@
+---
+
+- name: Install java
+  hosts: all
+  remote_user: root
+  roles:
+  - java
+
+- name: Install zookeeper
+  hosts: zookeeper 
+  remote_user: root
+  roles:
+  - zookeeper
+
+

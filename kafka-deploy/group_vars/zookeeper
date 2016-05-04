@@ -1,0 +1,7 @@
+#Zookeeper configuration
+
+zookeeper_version: 3.4.8
+zookeeper_user: zookeeper
+zookeeper_dir: /usr/local/zookeeper
+zookeeper_data: /usr/local/zookeeper/data
+zookeeper_port: 2181

@@ -1,0 +1,29 @@
+---
+
+- include_vars: group_vars/zookeeper
+
+- name: check dependencies
+  yum: name=tar state=present
+
+
+- name: install zookeeper
+  unarchive: src=files/zookeeper-{{ zookeeper_version }}.tar.gz dest={{ zookeeper_dir }} creates={{ zookeeper_dir }}
+
+
+- name: create zookeeper user
+  user: name={{ zookeeper_user }} state=present
+
+- name: initialize zookeeper
+  template: src=roles/zookeeper/templates/myid.j2 
+            dest={{ zookeeper_data }}/myid
+            owner={{ zookeeper_user }}
+            group={{ zookeeper_user }}
+            mode=0755
+            
+- name: configure zookeeper
+  template: src=roles/zookeeper/templates/zoo.cfg.j2 dest={{ zookeeper_dir }}/conf/zoo.cfg owner=root group=root mode=0755
+  notify:
+  - restart zookeeper
+
+- name: start zookeeper
+  command: sudo -u {{ zookeeper_user }} {{ zookeeper_dir }}/bin/zkServer.sh start

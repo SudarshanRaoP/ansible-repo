@@ -1,0 +1,6 @@
+---
+
+- include_vars: group_vars/zookeeper
+
+- name: restart zookeeper
+  command: sudo -u {{ zookeeper_user }} {{ zookeeper_dir }}/bin/zkServer.sh restart

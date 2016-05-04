@@ -1,0 +1,7 @@
+---
+
+#this task installs Java
+
+- name: install Java
+  yum: name=java-1.7.0-openjdk state=present
+
