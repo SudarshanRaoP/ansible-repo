@@ -1,0 +1,6 @@
+---
+
+- include_vars: group_vars/kafka
+
+- name: restart kafka server
+  command: "sudo -u {{ kafka_user }} {{ kafka_home }}/bin/kafka-server-stop.sh && sudo -u {{ kafka_user }} {{ kafka_home }}/bin/kafka-server-start.sh {{ kafka_home }}/config/server.properties"

@@ -1,0 +1,10 @@
+#Kafka variables
+
+kafka_version: 0.8.2.1
+scala_version: 2.11
+kafka_user: kafka
+kafka_port: 9092
+kafka_dir: /usr/local
+kafka_home: "{{ kafka_dir }}/kafka_{{ scala_version }}-{{ kafka_version }}"
+kafka_logdir: "{{ kafka_home }}/logs"
+kafka_zk_quorum: "localhost:2181"
