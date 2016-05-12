@@ -1,0 +1,12 @@
+---
+#This role configures yum to use proxy
+
+- name: yum proxy setting
+  lineinfile: dest=/etc/yum.conf state=present line="proxy={{ proxy_url }}"
+
+
+#If proxy server requires username and password. Then uncomment following lines
+#
+#- lineinfile: dest=/etc/yum.conf state=present line="proxy_username={{ yum_user }}"
+#
+#- lineinfile: dest=/etc/yum.conf state=present line="proxy_password={{ yum_password }}"

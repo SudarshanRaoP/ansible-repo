@@ -1,0 +1,11 @@
+---
+
+- name: Setup YUM proxy
+  hosts: all
+  remote_user: root
+  vars:
+    proxy_url: "http://proxyserver.domain.com:9999"
+    yum_username: "yum-user"
+    yum_password: "yum-password"
+  roles:
+  - yum_proxy
