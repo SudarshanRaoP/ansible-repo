@@ -1,0 +1,16 @@
+---
+
+- name: Install KDC
+  hosts: kdcserver
+  remote_user: root
+  roles:
+  - kdc
+  - kclient
+  - kadmin
+
+- name: Install kerberos client
+  hosts: all
+  remote_user: root
+  roles:
+  - kclient
+

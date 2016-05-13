@@ -1,0 +1,6 @@
+---
+
+- include_vars: group_vars/kerberos
+
+- name: restart kdc
+  service: name=krb5dc state=restarted

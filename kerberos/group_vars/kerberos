@@ -1,0 +1,6 @@
+#Kerberos configuration
+
+kdc_server: "kerberos.mydomain.com"
+realm_name: "MYDOMAIN.COM"
+kdc_master_password: "mypassword"
+

@@ -1,0 +1,4 @@
+---
+
+- name: restart kadmin
+  service: name=kadmin state=restarted

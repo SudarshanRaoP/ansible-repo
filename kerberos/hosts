@@ -1,0 +1,8 @@
+[all]
+kerberos.mydomain.com
+host1.mydomain.com
+host2.mydomain.com
+
+[kdcserver]
+kerberos.mydomain.com
+

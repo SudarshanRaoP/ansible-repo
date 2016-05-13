@@ -1,0 +1,23 @@
+---
+
+# This task installs KDC
+
+- include_vars: group_vars/kerberos
+
+- name: Install KDC server
+  yum: name={{ item }} state=present
+  with_items:
+  - krb5-server
+  - krb5-workstation
+
+- name: configure KDC
+  lineinfile: dest=/var/kerberos/krb5kdc/kdc.conf regex='EXAMPLE.COM' replace="{{ realm_name }}" backup=yes
+  notify:
+  - restart kdc
+
+- name: initialize REALM
+  command: kdb5_util create -r {{ realm_name }} -s -P {{ realm_master_password }}
+
+- name: start KDC server
+  service: name=krb5kdc state=started enabled=yes
+

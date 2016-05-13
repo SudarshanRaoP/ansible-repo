@@ -1,0 +1,10 @@
+---
+
+- include_vars: group_vars/kerberos
+
+- name: Install kerberos client
+  yum: name=krb5-workstation state=present
+
+- name: configure krb5.conf
+  template: src=roles/kclient/templates/krb5.conf.j2 dest=/etc/krb5.conf
+

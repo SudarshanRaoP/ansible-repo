@@ -1,0 +1,11 @@
+---
+
+- include_vars: group_vars/kerberos
+
+- name: configure KADMIN
+  template: src=roles/kadmin/templates/kadm5.acl.j2 dest=/var/kerberos/krb5kdc/kadm5.acl
+  notify:
+  - restart kadmin
+
+- name: start kadmin
+  service: name=kadmin state=started enabled=yes
