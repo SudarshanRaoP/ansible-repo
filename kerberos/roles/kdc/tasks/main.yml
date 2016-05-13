@@ -17,6 +17,7 @@
 
 - name: initialize REALM
   command: kdb5_util create -r {{ realm_name }} -s -P {{ realm_master_password }}
+  ignore_errors: yes
 
 - name: start KDC server
   service: name=krb5kdc state=started enabled=yes
