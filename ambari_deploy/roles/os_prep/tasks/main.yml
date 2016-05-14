@@ -1,0 +1,5 @@
+---
+
+- include: install_java.yml
+- include: install_mysql_connector.yml
+- include: ntp_iptables.yml
