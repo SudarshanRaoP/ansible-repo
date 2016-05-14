@@ -3,3 +3,6 @@
 - include: install_java.yml
 - include: install_mysql_connector.yml
 - include: ntp_iptables.yml
+
+- name: configuring ambari repository
+  template: src=roles/os_prep/templates/ambari.repo.j2 dest=/etc/yum.repos.d/ambari.repo
