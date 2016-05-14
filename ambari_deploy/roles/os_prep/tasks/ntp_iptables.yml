@@ -9,11 +9,11 @@
   service: name=iptables state=stopped enabled=no
 
 - name: disable transparent_huge_pages command 1
-  lineinfile: dest=/etc/rc.local line=if test -f /sys/kernel/mm/transparent_hugepage/enabled; then echo never > /sys/kernel/mm/redhat_transparent_hugepage/enabled;fi
+  lineinfile: dest=/etc/rc.local line=if test -f /sys/kernel/mm/transparent_hugepage/enabled; then echo never > /sys/kernel/mm/transparent_hugepage/enabled;fi
   notify:
   - reload rc.local
   
 - name: disable transparent_huge_pages command 2
-  lineinfile: dest=/etc/rc.local line=if test -f /sys/kernel/mm/transparent_hugepage/defrag; then echo never > /sys/kernel/mm/redhat_transparent_hugepage/defrag; fi
+  lineinfile: dest=/etc/rc.local line=if test -f /sys/kernel/mm/transparent_hugepage/defrag; then echo never > /sys/kernel/mm/transparent_hugepage/defrag; fi
   notify:
   - reload rc.local
