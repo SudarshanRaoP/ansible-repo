@@ -35,3 +35,4 @@
   with_items:
   - localhost
   - {{ ambari_dbhost }}
+  - {{ ambari_host }}
