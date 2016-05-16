@@ -1,6 +1,7 @@
 ---
 
 # This task configures hosts for nss-pam-ldap auth
+- include_vars: group_vars/ldap
 
 - name: install packages
   yum: name={{ item }} state=present
