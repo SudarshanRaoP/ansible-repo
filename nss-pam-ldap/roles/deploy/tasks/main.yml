@@ -1,0 +1,18 @@
+---
+
+# This task configures hosts for nss-pam-ldap auth
+
+- name: install packages
+  yum: name={{ item }} state=present
+  with_items:
+  - openldap-clients
+  - nss-pam-ldapd
+
+- name: configure
+  command: "/usr/sbin/authconfig --enableldap --enableldapauth --ldapserver={{ ldap_server }} --ldapbasedn=\"{{ basedn }}\" --enablemkhomedir --update"
+  notify:
+  - restart nslcd
+
+- name: start nslcd
+  service: name=nslcd state=started
+

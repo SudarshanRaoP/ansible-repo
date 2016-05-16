@@ -1,0 +1,7 @@
+---
+
+- name: Configure nss-pam-ldap
+  hosts: all
+  remote_user: root
+  roles:
+  - deploy
