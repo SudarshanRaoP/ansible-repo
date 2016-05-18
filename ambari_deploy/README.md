@@ -1,6 +1,6 @@
 ## Ambari autodeployment playbook
 
-#### Configure `hosts` file and place in `/etc/ansible/conf`
+#### Configure `hosts` file and place in `/etc/ansible/`
 ```yml
 [all]
 host1.example.com
