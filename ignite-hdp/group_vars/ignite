@@ -1,6 +1,7 @@
 #Ignite settings
 
 ignite_version: 1.6.0
+ignite_dir: /usr/local
 ignite_home: "{{ ignite_dir }}/apache-ignite-hadoop-{{ ignite_version }}-bin/"
 ignite_user: ignite
 ignite_group: ignite
