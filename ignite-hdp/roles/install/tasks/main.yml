@@ -44,6 +44,14 @@
             dest="{{ ignite_home }}/config/default-config.xml"
             owner={{ ignite_user }}
             group={{ ignite_group }}
-  
+
+- name: create Ignite start script
+  template: src=roles/install/templates/ignite-start.sh.j2
+            dest={{ ignite_start_script }}
+            owner=root
+            group=root
+            mode=0755
+            
+
 - name: start Ignite
-  command: sudo -u {{ ignite_user }} {{ ignite_home }}/bin/ignite.sh
+  command: sudo -u {{ ignite_user }} {{ ignite_start_script }}

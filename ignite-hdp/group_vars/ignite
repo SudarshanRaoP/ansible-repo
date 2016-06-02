@@ -4,7 +4,9 @@ ignite_version: 1.6.0
 ignite_home: "{{ ignite_dir }}/apache-ignite-hadoop-{{ ignite_version }}-bin/"
 ignite_user: ignite
 ignite_group: ignite
-hdfs_url: hdfs://localhost:8020
+hdfs_url: "hdfs://localhost:8020"
+hadoop_conf_dir: /etc/hadoop/conf
+ignite_start_script: /usr/bin/ignite-start.sh
 ignite_port: 10500
 ignite_bind: 0.0.0.0
 ignite_client_conf: /etc/ignite/conf/
