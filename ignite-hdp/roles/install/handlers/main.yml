@@ -1,0 +1,4 @@
+---
+
+- name: reload profiles
+  command: source /etc/profile.d/ignite-env.sh

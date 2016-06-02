@@ -1,0 +1,13 @@
+[all]
+ign1.example.com
+ign2.example.com
+ign3.example.com
+igc.example.com
+
+[ignitenodes]
+ign1.example.com
+ign2.example.com
+ign3.example.com
+
+[igniteclients]
+igc.example.com
