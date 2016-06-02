@@ -22,15 +22,14 @@
 - include_vars: group_vars/ignite
 
 - name: create ignite user
-  user: name={{ ignite_user }} shell=/bin/bash group={{ ignite_group }}
-
-- file: path={{ ignite_home }} state=directory mode=0755
+  user: name={{ ignite_user }} shell=/bin/bash
 
 - name: install Apache Ignite
   unarchive: src=files/apache-ignite-hadoop-{{ ignite_version }}-bin.zip
-             dest={{ ignite_home }}
+             dest={{ ignite_dir }}
              owner={{ ignite_user }}
              group={{ ignite_group }}
+             creates={{ ignite_home }}
 
 - name: Setup env
   template: src=roles/install/templates/ignite-env.sh.j2 dest=/etc/profile.d/ignite-env.sh
