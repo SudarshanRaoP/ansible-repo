@@ -1,0 +1,4 @@
+##LDAP Configuration
+
+ldap_server: "ldap://directory.example.com:389"
+basedn: "ou=Users,dc=example,dc=com"
