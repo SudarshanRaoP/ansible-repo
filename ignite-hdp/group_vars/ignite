@@ -7,7 +7,15 @@ ignite_user: ignite
 ignite_group: ignite
 hdfs_url: "hdfs://localhost:8020"
 hadoop_conf_dir: /etc/hadoop/conf
+igfs_name: igfs
+
+# custom node start script
 ignite_start_script: /usr/bin/ignite-start.sh
+
+#Node 
 ignite_port: 10500
 ignite_bind: 0.0.0.0
+zk_connect: "127.0.0.1:2181"
+
+#Client configuration location
 ignite_client_conf: /etc/ignite/conf/
