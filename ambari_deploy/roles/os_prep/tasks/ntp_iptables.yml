@@ -1,19 +1,21 @@
 ---
 
 ##This task starts ntpd service and stops iptables service
-
+- name: Install ntp
+  yum: name=ntp state=present
+  
 - name: start ntpd
   service: name=ntpd state=started enabled=yes
-
+  
 - name: stop iptables
   service: name=iptables state=stopped enabled=no
+  when: (ansible_distribution == "CentOS" and ansible_distribution_major_version == "6") or
+        (ansible_distribution == "Redhat" and ansible_distribution_major_version == "6")
 
-- name: disable transparent_huge_pages command 1
-  lineinfile: dest=/etc/rc.local line=if test -f /sys/kernel/mm/transparent_hugepage/enabled; then echo never > /sys/kernel/mm/transparent_hugepage/enabled;fi
-  notify:
-  - reload rc.local
-  
-- name: disable transparent_huge_pages command 2
-  lineinfile: dest=/etc/rc.local line=if test -f /sys/kernel/mm/transparent_hugepage/defrag; then echo never > /sys/kernel/mm/transparent_hugepage/defrag; fi
+- name: disable transparent_huge_pages
+  lineinfile: dest=/etc/rc.local line={{ item }}
+  with_items:
+  - "if test -f /sys/kernel/mm/transparent_hugepage/enabled; then echo never > /sys/kernel/mm/transparent_hugepage/enabled;fi"
+  - "if test -f /sys/kernel/mm/transparent_hugepage/defrag; then echo never > /sys/kernel/mm/transparent_hugepage/defrag; fi"
   notify:
   - reload rc.local
