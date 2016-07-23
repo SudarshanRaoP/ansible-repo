@@ -44,12 +44,7 @@
   raw: mysql -uroot -e "show databases;"
 
 #- name: configure mysql for ambari user on localhost
-- mysql_user: name={{ ambari_dbuser }} password={{ ambari_dbpasswd }} 
-  			host={{ item }} 
-  			state=present 
-  			priv=*.*:ALL
-  			login_user=root
-  			login_password={{ mysql_rootpw }}
+- mysql_user: name={{ ambari_dbuser }} password={{ ambari_dbpasswd }} host={{ item }} state=present priv="*.*:ALL" login_user=root login_password={{ mysql_rootpw }}
   with_items:
   - localhost
   - "{{ ambari_dbhost }}"
