@@ -31,4 +31,4 @@
   - restart ambari agent
 
 - name: start ambari agent
-  service: name=ambar-agent state=started enabled=yes
+  service: name=ambari-agent state=started enabled=yes
