@@ -4,8 +4,11 @@
 - name: check of dependencies
   yum: name=tar state=present
 
+- name: create /usr/java if does not exist
+  file: path=/usr/java state=directory mode=0755
+
 - name: install java
-  unarchive: src=files/jdk{{ java_version }}.tar.gz dest={{ java_home }} creates={{ java_home }}
+  unarchive: src=files/jdk{{ java_version }}.tar.gz dest={{ java_dir }} creates={{ java_home }}
 
 - name: set JAVA_HOME 
-  command: export JAVA_HOME={{ java_home }}
+  raw: export JAVA_HOME={{ java_home }}
