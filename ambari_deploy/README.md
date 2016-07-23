@@ -1,26 +1,44 @@
-## Ambari autodeployment playbook
+# Ambari autodeployment playbook
+### Tested with CentOS 7
 
 #### Configure `hosts` file and place in `/etc/ansible/`
 ```yml
 [all]
-host1.example.com
-host2.example.com
-host3.example.com
+controller.cloudwick.com
+master1.cloudwick.com
+master2.cloudwick.com
+master3.cloudwick.com
+master4.cloudwick.com
+gateway.cloudwick.com
+host1.cloudwick.com
+host2.cloudwick.com
+host3.cloudwick.com
+host4.cloudwick.com
+host5.cloudwick.com
 
-[ambariserver]
-host2.example.com
+[controller]
+controller.cloudwick.com
 
-[mysqlserver]
-host2.example.com
+[gateway]
+gateway.cloudwick.com
 
-[cluster]
-host1.example.com
-host3.example.com
+[host]
+host1.cloudwick.com
+host2.cloudwick.com
+host3.cloudwick.com
+host4.cloudwick.com
+host5.cloudwick.com
+
+[master]
+master1.cloudwick.com
+master2.cloudwick.com
+master3.cloudwick.com
+master4.cloudwick.com
 
 ```
 
 
-#### Configure `group_vars/main`
+#### Edit`group_vars/main` to customize deployment
 
 ```yml
 ---
@@ -30,12 +48,11 @@ java_dir: /usr/java
 java_home: /usr/java/jdk1.7.0_45
 
 #Mysql variables
-
 mysql_rootpw:
 
 #Ambari database variables
-ambari_version: 2.0.0
-ambari_host: host1.example.com
+ambari_version: 2.2.2
+ambari_host: master4.cloudwick.com
 ambari_dbport: 3306
 ambari_dbtype: mysql
 ambari_jdbc: com.mysql.jdbc.Driver
@@ -43,5 +60,6 @@ ambari_jdbcdriver: /usr/share/java/mysql-connector-java.jar
 ambari_dbname: ambari
 ambari_dbuser: ambari
 ambari_dbpasswd: ambari
-ambari_dbhost: host1.example.com 
+ambari_dbhost: gateway.cloudwick.com
+
 ```
