@@ -27,8 +27,14 @@
 - name: creating password file
   template: src=roles/ambariserver/templates/password.dat.j2 dest=/etc/ambari-server/conf/password.dat
 
+- name: installing Mysql client
+  yum: name=mysql state=present
+
+- name: creating Ambari database
+  mysql_db: name={{ ambari_dbname }} state=present login_host={{ ambari_dbhost }} login_user={{ ambari_dbuser }} login_password={{ ambari_dbpasswd}}
+  
 - name: configure database
-  command: /usr/bin/mysql --user={{ ambari_dbuser }} \
+  raw: /usr/bin/mysql --user={{ ambari_dbuser }} \
            --password={{ ambari_dbpasswd }} \
            --host={{ ambari_dbhost }} \
            -e "SOURCE /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql;" {{ ambari_dbname }}
