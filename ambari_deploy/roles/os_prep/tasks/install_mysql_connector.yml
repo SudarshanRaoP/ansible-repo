@@ -1,6 +1,7 @@
 ---
 
 ##This task installs mysql java connector
-
+- name: Python Mysql for ansible
+  yum: name="MySQL-python" state=present
 - name: install mysql-connector-java
   yum: name=mysql-connector-java state=present
